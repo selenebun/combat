@@ -34,7 +34,7 @@ class Tank {
     }
 
     update() {
-        let vel = createVector(this.speed, 0).rotate(this.angle);
+        let vel = p5.Vector.fromAngle(this.angle, this.speed);
         this.pos.add(vel);
     }
 }
