@@ -14,13 +14,14 @@ function setup() {
     resizeCanvas(div.offsetWidth, div.offsetHeight, true);
 
     t = new Tank(width/2, height/2, {
-        angle: radians(35),
-        gunAngle: radians(60)
+        gunAngle: radians(60),
     });
 }
 
 function draw() {
     background(0);
+
+    controls();
 
     /*
     // Entities is actually just tanks with projectiles concat
@@ -38,4 +39,25 @@ function draw() {
  * User input functions
  */
 
-function keyPressed() {}
+function controls() {
+    // W
+    if (keyIsDown(87)) t.speed = lerp(t.speed, t.maxSpeed, 0.05);
+
+    // A
+    if (keyIsDown(65)) t.angle -= t.angleVel;
+
+    // S
+    if (keyIsDown(83)) t.speed = lerp(t.speed, -t.maxSpeed, 0.05);
+
+    // D
+    if (keyIsDown(68)) t.angle += t.angleVel;
+
+    // Aim gun at mouse position
+    let m = createVector(mouseX, mouseY);
+    t.gunAngle = m.sub(t.pos).heading() - t.angle;
+}
+
+function keyReleased() {
+    // W or S
+    if (keyCode === 87 || keyCode === 83) t.speed = 0;
+}

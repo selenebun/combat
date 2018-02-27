@@ -11,10 +11,14 @@ class Tank {
         this.health = 1;
 
         // Physics
-        this.angle = 0;
-        this.gunAngle = 0;
         this.pos = createVector(x, y);
-        this.vel = createVector(0.3, 0.3);
+
+        this.speed = 0;
+        this.maxSpeed = ts / 60 * 3;
+
+        this.angle = 0;
+        this.angleVel = radians(2);
+        this.gunAngle = 0;
 
         // Fill in any other properties from the template
         applyTemplate(this, template);
@@ -30,6 +34,7 @@ class Tank {
     }
 
     update() {
-        this.pos.add(this.vel);
+        let vel = createVector(this.speed, 0).rotate(this.angle);
+        this.pos.add(vel);
     }
 }

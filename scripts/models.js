@@ -19,6 +19,13 @@ MODELS.basicTank = function(t) {
     fill('#006C11');
     rect(0, 0, ts, ts * 0.7, ts * 0.15);
 
+    // Draw markings on front
+    let m = ts * 0.45;
+    let c = ts * 0.35;
+    let e = ts * 0.15;
+    fill('#606060');
+    triangle(m, 0, c, e, c, -e);
+
     rotate(t.gunAngle);
 
     // Draw barrel
