@@ -1,6 +1,12 @@
-const MODELS = {};
+const MODEL = {};
 
-MODELS.basicTank = function(t) {
+
+// Null model
+MODEL.null = function(e) {};
+
+
+// Tank models
+MODEL.basicTank = function(t) {
     push();
 
     translate(t.pos.x, t.pos.y);
@@ -44,4 +50,13 @@ MODELS.basicTank = function(t) {
     ellipse(0, 0, ts * 0.5, ts * 0.5);
 
     pop();
+};
+
+
+// Bullet models
+MODEL.basicBullet = function(b) {
+    fill(0);
+    noStroke();
+    ellipseMode(RADIUS);
+    ellipse(b.pos.x, b.pos.y, this.radius, this.radius);
 };

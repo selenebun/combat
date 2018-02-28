@@ -68,7 +68,7 @@ function setup() {
     }
 
     let c = map.center();
-    pl = new Tank(c.x, c.y, TANKS.player1);
+    pl = new Tank(c.x, c.y, TANK.player1);
 }
 
 function draw() {
@@ -106,7 +106,7 @@ function controls() {
 
     // A or left arrow
     if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) {
-        pl.angle -= pl.angVel;
+        pl.angle -= pl.angSpeed;
     }
 
     // S or down arrow
@@ -116,7 +116,7 @@ function controls() {
 
     // D or right arrow
     if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
-        pl.angle += pl.angVel;
+        pl.angle += pl.angSpeed;
     }
 
     // Aim barrel according to adjusted mouse position
