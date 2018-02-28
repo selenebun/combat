@@ -16,7 +16,7 @@ MODELS.basicTank = function(t) {
 
 
     // Draw tank body
-    fill('#006C11');
+    fill(t.primary);
     rect(0, 0, ts, ts * 0.7, ts * 0.15);
 
     // Draw markings on front
@@ -39,7 +39,8 @@ MODELS.basicTank = function(t) {
     rect(r * 2 + w, 0, w * 2, ts * 0.3);
 
     // Draw turret
-    fill('#005C01');
+    fill(t.secondary);
+    ellipseMode(CENTER)
     ellipse(0, 0, ts * 0.5, ts * 0.5);
 
     pop();

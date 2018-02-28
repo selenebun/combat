@@ -1,24 +1,24 @@
 class Tank {
     constructor(x, y, template) {
-        // AI
-        //this.ai
-
         // Display
-        this.model = MODELS.basicTank;
+        this.model = MODELS.basicTank;  // skin
+        this.primary = '#007C21';       // body color
+        this.secondary = '#005C01';     // turret color
 
         // Misc
         this.dead = false;
-        this.health = 1;
 
         // Physics
-        this.pos = createVector(x, y);
+        this.pos = createVector(x, y);  // position
+        this.speed = 0;                 // current speed
+        this.angle = random(TWO_PI);    // angle of tank
+        this.gunAngle = 0;              // angle of turret relative to tank
+        this.radius = ts * 0.6;         // radius of hitbox
 
-        this.speed = 0;
-        this.maxSpeed = ts / 60 * 3;
-
-        this.angle = 0;
-        this.angleVel = radians(2);
-        this.gunAngle = 0;
+        // Stats
+        this.angVel = radians(2);       // turning rate
+        this.armor = 0;                 // shields
+        this.maxSpeed = ts / 60 * 4;    // maximum speed
 
         // Fill in any other properties from the template
         applyTemplate(this, template);
@@ -29,8 +29,20 @@ class Tank {
         this.display();
     }
 
+    damage() {
+        this.armor > 0 ? this.armor-- : this.dead = true;
+    }
+
     display() {
         this.model(this);
+
+        // Display hitbox
+        if (showHitboxes) {
+            fill(255, 0, 0, 63);
+            stroke(255);
+            ellipseMode(RADIUS);
+            ellipse(this.pos.x, this.pos.y, this.radius, this.radius);
+        }
     }
 
     update() {
