@@ -1,6 +1,8 @@
 let bullets = [];
-let map;
+let ps = [];
 let tanks = [];
+
+let map;
 
 let armor = 0;
 let kills = 0;
@@ -85,12 +87,11 @@ function draw() {
     // Player movement
     controls();
 
-    let entities = bullets.concat([pl]).concat(tanks);
-    for (let i = entities.length - 1; i >= 0; i--) {
-        let e = entities[i];
-        e.act();
-        if (e.dead) entities.splice(i, 1);
-    }
+    // Entities
+    mainLoop(tanks);
+    pl.act();
+    mainLoop(ps);
+    mainLoop(bullets);
 }
 
 
@@ -140,4 +141,8 @@ function keyReleased() {
     if (keyCode === 87 || keyCode === 83 || keyCode === UP_ARROW || keyCode === DOWN_ARROW) {
         pl.speed = 0;
     }
+}
+
+function mousePressed() {
+    ps.push(new ParticleSystem(mouseX + pl.pos.x - width/2, mouseY + pl.pos.y - height/2, PS.rocketExplosion));
 }

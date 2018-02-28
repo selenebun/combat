@@ -1,9 +1,37 @@
 const MODEL = {};
 
-
 // Null model
 MODEL.null = function(e) {};
 
+// Bullet models
+MODEL.basicBullet = function(b) {
+    fill(0);
+    noStroke();
+    ellipseMode(RADIUS);
+    ellipse(b.pos.x, b.pos.y, b.radius, b.radius);
+};
+
+// Particle models
+MODEL.basicParticle = function(p) {
+    fill(p.color.concat(p.lifespan));
+    stroke(0, p.lifespan);
+    ellipseMode(RADIUS);
+    ellipse(p.pos.x, p.pos.y, p.radius, p.radius);
+};
+
+MODEL.squareParticle = function(p) {
+    push();
+
+    translate(p.pos.x, p.pos.y);
+    rotate(p.angle);
+
+    fill(p.color.concat(p.lifespan));
+    stroke(0, p.lifespan);
+    rectMode(CENTER);
+    rect(0, 0, this.radius, this.radius);
+    
+    pop();
+}
 
 // Tank models
 MODEL.basicTank = function(t) {
@@ -50,13 +78,4 @@ MODEL.basicTank = function(t) {
     ellipse(0, 0, ts * 0.5, ts * 0.5);
 
     pop();
-};
-
-
-// Bullet models
-MODEL.basicBullet = function(b) {
-    fill(0);
-    noStroke();
-    ellipseMode(RADIUS);
-    ellipse(b.pos.x, b.pos.y, this.radius, this.radius);
 };

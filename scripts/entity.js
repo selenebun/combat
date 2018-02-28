@@ -16,7 +16,7 @@ class Entity {
 
     act() {
         this.update();
-        this.display();
+        if (!offScreen(this.pos.x, this.pos.y, this.radius)) this.display();
     }
 
     display() {

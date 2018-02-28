@@ -8,3 +8,17 @@ function applyTemplate(obj, template) {
         obj[key] = template[key];
     }
 }
+
+// Run main loop for an array of actors
+function mainLoop(arr) {
+    for (let i = arr.length - 1; i >= 0; i--) {
+        let e = arr[i];
+        e.act();
+        if (e.dead) arr.splice(i, 1);
+    }
+}
+
+// Determine if point is off-screen
+function offScreen(x, y, r) {
+    return (x + r < pl.pos.x - width/2 || x - r > pl.pos.x + width/2 || y + r < pl.pos.y - height/2 || y - r > pl.pos.y + height/2);
+}
