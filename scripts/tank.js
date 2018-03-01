@@ -22,8 +22,40 @@ class Tank extends Entity {
         applyTemplate(this, template);
     }
 
+    // Aim barrel
+    aim(x, y) {
+        let d = createVector(x, y).sub(this.pos);
+        this.gunAngle = d.heading() - this.angle;
+    }
+
+    // Accelerate tank backwards
+    backward() {
+        this.speed = lerp(this.speed, -this.maxSpeed, 0.05);
+    }
+
+    // Deal damage to tank
     damage() {
         this.armor > 0 ? this.armor-- : this.dead = true;
+    }
+
+    // Accelerate tank forwards
+    forward() {
+        this.speed = lerp(this.speed, this.maxSpeed, 0.05);
+    }
+
+    // Turn tank left
+    left() {
+        this.angle -= this.angSpeed;
+    }
+
+    // Turn tank right
+    right() {
+        this.angle += this.angSpeed;
+    }
+
+    // Stop tank
+    stop() {
+        this.speed = 0;
     }
 
     update() {

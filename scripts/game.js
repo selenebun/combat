@@ -101,28 +101,22 @@ function draw() {
 
 function controls() {
     // W or up arrow
-    if (keyIsDown(87) || keyIsDown(UP_ARROW)) {
-        pl.speed = lerp(pl.speed, pl.maxSpeed, 0.05);
-    }
+    if (keyIsDown(87) || keyIsDown(UP_ARROW)) pl.forward();
 
     // A or left arrow
-    if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) {
-        pl.angle -= pl.angSpeed;
-    }
+    if (keyIsDown(65) || keyIsDown(LEFT_ARROW)) pl.left();
 
     // S or down arrow
-    if (keyIsDown(83) || keyIsDown(DOWN_ARROW)) {
-        pl.speed = lerp(pl.speed, -pl.maxSpeed, 0.05);
-    }
+    if (keyIsDown(83) || keyIsDown(DOWN_ARROW)) pl.backward();
 
     // D or right arrow
-    if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) {
-        pl.angle += pl.angSpeed;
-    }
+    if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) pl.right();
 
     // Aim barrel according to adjusted mouse position
-    let m = createVector(mouseX + pl.pos.x - width/2, mouseY + pl.pos.y - height/2);
-    pl.gunAngle = m.sub(pl.pos).heading() - pl.angle;
+    pl.aim(mouseX + pl.pos.x - width/2, mouseY + pl.pos.y - height/2);
+    for (let i = 0; i < tanks.length; i++) {
+        tanks[i].aim(pl.pos.x, pl.pos.y);
+    }
 }
 
 function keyPressed() {
@@ -139,7 +133,7 @@ function keyPressed() {
 function keyReleased() {
     // W or S or up or down arrow
     if (keyCode === 87 || keyCode === 83 || keyCode === UP_ARROW || keyCode === DOWN_ARROW) {
-        pl.speed = 0;
+        pl.stop();
     }
 }
 
