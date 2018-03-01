@@ -48,12 +48,15 @@ class Tank extends Entity {
 
     // Angle tank towards point
     face(x, y) {
+        // Don't turn if approximately facing right direction
         let a = createVector(x, y).sub(this.pos).heading();
         let diff = abs(this.angle - a);
         if (diff < this.angSpeed) return;
-        if (this.angle < a) {
+
+        // Go right or left depending on which is faster
+        if ((this.pos.x - x) * sin(this.angle) > (this.pos.y - y) * cos(this.angle)) {
             this.right();
-        } else if (this.angle > a) {
+        } else {
             this.left();
         }
     }
