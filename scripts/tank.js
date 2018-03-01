@@ -51,7 +51,7 @@ class Tank extends Entity {
         // Don't turn if approximately facing right direction
         let a = createVector(x, y).sub(this.pos).heading();
         let diff = abs(this.angle - a);
-        if (diff < this.angSpeed) return;
+        if (diff < radians(30)) return;
 
         // Go right or left depending on which is faster
         if ((this.pos.x - x) * sin(this.angle) > (this.pos.y - y) * cos(this.angle)) {
@@ -79,7 +79,7 @@ class Tank extends Entity {
         }
         let a = createVector(x, y).sub(this.pos).heading();
         let diff = abs(this.angle - a);
-        if (diff < this.angSpeed) {
+        if (diff < radians(30)) {
             this.forward();
         } else {
             this.face(x, y);
