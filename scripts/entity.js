@@ -19,6 +19,11 @@ class Entity {
         if (!offScreen(this.pos.x, this.pos.y, this.radius)) this.display();
     }
 
+    // Check if point is inside hitbox
+    contains(x, y) {
+        return sq(x - this.pos.x) + sq(y - this.pos.y) < sq(this.radius);
+    }
+
     display() {
         this.model(this);
 

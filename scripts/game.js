@@ -66,7 +66,7 @@ function setup() {
 
     for (let i = 0; i < 10; i++) {
         let p = map.randomPos();
-        tanks.push(new Tank(p.x, p.y));
+        tanks.push(new Tank(p.x, p.y, random() < 0.3 ? TANK.follow : TANK.aim));
     }
 
     let c = map.center();

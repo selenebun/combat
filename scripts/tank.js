@@ -3,7 +3,7 @@ class Tank extends Entity {
         super(x, y);
 
         // AI
-        this.ai = AI.aim;              // AI
+        this.ai = AI.null;              // AI
 
         // Display
         this.model = MODEL.basicTank;   // skin
@@ -49,8 +49,6 @@ class Tank extends Entity {
     // Angle tank towards point
     face(x, y) {
         let a = createVector(x, y).sub(this.pos).heading();
-
-        // Naively turn right only
         let diff = abs(this.angle - a);
         if (diff < this.angSpeed) return;
         if (this.angle < a) {
@@ -68,6 +66,21 @@ class Tank extends Entity {
     // Turn tank left
     left() {
         this.angle -= this.angSpeed;
+    }
+
+    // Navigate to point
+    navigateTo(x, y) {
+        if (this.contains(x, y)) {
+            this.stop();
+            return;
+        }
+        let a = createVector(x, y).sub(this.pos).heading();
+        let diff = abs(this.angle - a);
+        if (diff < this.angSpeed) {
+            this.forward();
+        } else {
+            this.face(x, y);
+        }
     }
 
     // Turn tank right

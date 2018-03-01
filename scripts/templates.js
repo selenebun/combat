@@ -23,9 +23,17 @@ PS.rocketExplosion = {
 
 // Tanks
 TANK.player1 = {
-    // AI
-    ai: AI.null,
     // Display
     primary: '#004790',
     secondary: '#102770'
+};
+
+TANK.aim = {
+    // AI
+    ai: AI.aim
+};
+
+TANK.follow = {
+    // AI
+    ai: AI.follow
 };
