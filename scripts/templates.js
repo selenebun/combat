@@ -23,6 +23,8 @@ PS.rocketExplosion = {
 
 // Tanks
 TANK.player1 = {
+    // AI
+    ai: AI.null,
     // Display
     primary: '#004790',
     secondary: '#102770'

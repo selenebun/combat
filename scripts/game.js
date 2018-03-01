@@ -114,9 +114,6 @@ function controls() {
 
     // Aim barrel according to adjusted mouse position
     pl.aim(mouseX + pl.pos.x - width/2, mouseY + pl.pos.y - height/2);
-    for (let i = 0; i < tanks.length; i++) {
-        tanks[i].aim(pl.pos.x, pl.pos.y);
-    }
 }
 
 function keyPressed() {

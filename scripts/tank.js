@@ -2,6 +2,9 @@ class Tank extends Entity {
     constructor(x, y, template) {
         super(x, y);
 
+        // AI
+        this.ai = AI.aim;              // AI
+
         // Display
         this.model = MODEL.basicTank;   // skin
         this.primary = '#007C21';       // body color
@@ -22,6 +25,11 @@ class Tank extends Entity {
         applyTemplate(this, template);
     }
 
+    act() {
+        this.ai(this);
+        super.act();
+    }
+
     // Aim barrel
     aim(x, y) {
         let d = createVector(x, y).sub(this.pos);
@@ -36,6 +44,20 @@ class Tank extends Entity {
     // Deal damage to tank
     damage() {
         this.armor > 0 ? this.armor-- : this.dead = true;
+    }
+
+    // Angle tank towards point
+    face(x, y) {
+        let a = createVector(x, y).sub(this.pos).heading();
+
+        // Naively turn right only
+        let diff = abs(this.angle - a);
+        if (diff < this.angSpeed) return;
+        if (this.angle < a) {
+            this.right();
+        } else if (this.angle > a) {
+            this.left();
+        }
     }
 
     // Accelerate tank forwards
