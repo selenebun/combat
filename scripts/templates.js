@@ -11,14 +11,27 @@ PART.fire = {
     color: [192, 57, 43],
     model: MODEL.squareParticle,
     // Misc
-    decay: 3
+    decay: 3,
+    // Methods
+    init: function() {
+        // Display
+        this.color = [200 + random(55), random(127), random(31)];
+
+        // Misc
+        this.decay = random(3, 6);
+
+        // Physics
+        this.angle = random(TWO_PI);
+        this.angVel = random(-2, 2);
+        this.radius = random(6, 12);
+    }
 };
 
 // Particle systems
-PS.rocketExplosion = {
+PS.explosion = {
     num: 32,
     pTemp: PART.fire,
-    speed: 10
+    speed: 3
 };
 
 // Tanks

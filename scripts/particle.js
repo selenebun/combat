@@ -3,7 +3,7 @@ class Particle extends Entity {
         super(x, y);
 
         // Display
-        this.color = 0;
+        this.color = [0, 0, 0];             // base RGB color
         this.model = MODEL.basicParticle;   // skin
 
         // Misc
@@ -12,12 +12,15 @@ class Particle extends Entity {
 
         // Physics
         this.vel = p5.Vector.random2D().mult(random(speed));
-        this.angle = random(TWO_PI);
-        this.angVel = random(-1, 1);
-        this.radius = random(8, 16);
+        this.angle = 0;
+        this.angVel = 0;
+        this.radius = 8;
 
         // Fill in any other properties from the template
         applyTemplate(this, template);
+
+        // Call init() method in case anything else needs to be set
+        this.init();
     }
 
     update() {

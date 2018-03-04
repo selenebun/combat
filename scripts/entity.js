@@ -12,6 +12,9 @@ class Entity {
 
         // Fill in any other properties from the template
         applyTemplate(this, template);
+
+        // Call init() method in case anything else needs to be set
+        this.init();
     }
 
     act() {
@@ -35,6 +38,9 @@ class Entity {
             ellipse(this.pos.x, this.pos.y, this.radius, this.radius);
         }
     }
+
+    // Call in case anything needs to be dynamically set
+    init() {}
 
     update() {}
 }

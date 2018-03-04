@@ -135,5 +135,5 @@ function keyReleased() {
 }
 
 function mousePressed() {
-    ps.push(new ParticleSystem(mouseX + pl.pos.x - width/2, mouseY + pl.pos.y - height/2, PS.rocketExplosion));
+    ps.push(new ParticleSystem(mouseX + pl.pos.x - width/2, mouseY + pl.pos.y - height/2, PS.explosion));
 }

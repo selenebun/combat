@@ -23,6 +23,9 @@ class Tank extends Entity {
         
         // Fill in any other properties from the template
         applyTemplate(this, template);
+
+        // Call init() method in case anything else needs to be set
+        this.init();
     }
 
     act() {
