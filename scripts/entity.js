@@ -28,15 +28,10 @@ class Entity {
         return d < this.radius + e.radius;
     }
 
-    // Check for collision with hitbox
-    collidePoint(x, y) {
-        let d = dist(this.pos.x, this.pos.y, x, y);
-        return d < this.radius;
-    }
-
     // Check if point is inside hitbox
     contains(x, y) {
-        return sq(x - this.pos.x) + sq(y - this.pos.y) < sq(this.radius);
+        let d = dist(this.pos.x, this.pos.y, x, y);
+        return d < this.radius;
     }
 
     display() {
