@@ -10,7 +10,7 @@ class Bullet extends Entity {
 
         // Physics
         this.radius = ts / 6;           // hitbox radius
-        this.speed = ts / 8;
+        this.speed = ts / 7;
 
         // Fill in any other properties from the template
         applyTemplate(this, template);
