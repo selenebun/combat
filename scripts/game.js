@@ -113,7 +113,8 @@ function controls() {
     if (keyIsDown(68) || keyIsDown(RIGHT_ARROW)) pl.right();
 
     // Aim barrel according to adjusted mouse position
-    pl.aim(mouseX + pl.pos.x - width/2, mouseY + pl.pos.y - height/2);
+    let m = adjustMouse();
+    pl.aim(m.x, m.y);
 }
 
 function keyPressed() {
@@ -135,5 +136,7 @@ function keyReleased() {
 }
 
 function mousePressed() {
-    ps.push(new ParticleSystem(mouseX + pl.pos.x - width/2, mouseY + pl.pos.y - height/2, PS.explosion));
+    // Spawn particle system at adjusted mouse position
+    let m = adjustMouse();
+    ps.push(new ParticleSystem(m.x, m.y, PS.explosion));
 }

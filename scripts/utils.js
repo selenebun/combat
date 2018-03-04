@@ -1,3 +1,8 @@
+// Get adjusted mouse coordinates based on camera
+function adjustMouse() {
+    return {x: mouseX + pl.pos.x - width/2, y: mouseY + pl.pos.y - height/2};
+}
+
 // Apply properties from a template to an object
 function applyTemplate(obj, template) {
     if (typeof template === 'undefined') return;

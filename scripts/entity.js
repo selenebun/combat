@@ -22,6 +22,18 @@ class Entity {
         if (!offScreen(this.pos.x, this.pos.y, this.radius)) this.display();
     }
 
+    // Check for collision with hitbox
+    collide(e) {
+        let d = this.pos.dist(e.pos);
+        return d < this.radius + e.radius;
+    }
+
+    // Check for collision with hitbox
+    collidePoint(x, y) {
+        let d = dist(this.pos.x, this.pos.y, x, y);
+        return d < this.radius;
+    }
+
     // Check if point is inside hitbox
     contains(x, y) {
         return sq(x - this.pos.x) + sq(y - this.pos.y) < sq(this.radius);
