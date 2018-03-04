@@ -8,16 +8,18 @@ const TANK = {};
 
 // AIs
 
-AI.null = function(t) {};
-
-AI.aim = function(t) {
-    t.aim(pl.pos.x, pl.pos.y);
-    t.face(pl.pos.x, pl.pos.y);
+AI.aim = {
+    act: function() {
+        this.t.aim(pl.pos.x, pl.pos.y);
+        this.t.face(pl.pos.x, pl.pos.y);
+    }
 };
 
-AI.follow = function(t) {
-    t.aim(pl.pos.x, pl.pos.y);
-    t.navigateTo(pl.pos.x, pl.pos.y);
+AI.follow = {
+    act: function() {
+        this.t.aim(pl.pos.x, pl.pos.y);
+        this.t.navigateTo(pl.pos.x, pl.pos.y);
+    }
 };
 
 

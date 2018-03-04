@@ -3,7 +3,7 @@ class Tank extends Entity {
         super(x, y);
 
         // AI
-        this.ai = AI.null;              // AI
+        this.ai = {};                   // AI
 
         // Display
         this.model = MODEL.basicTank;   // skin
@@ -29,7 +29,7 @@ class Tank extends Entity {
     }
 
     act() {
-        this.ai(this);
+        this.ai.act();
         super.act();
     }
 
@@ -67,6 +67,11 @@ class Tank extends Entity {
     // Accelerate tank forwards
     forward() {
         this.speed = lerp(this.speed, this.maxSpeed, 0.05);
+    }
+
+    // Call in case anything needs to be dynamically set
+    init() {
+        this.ai = new TankAI(this, this.ai);
     }
 
     // Turn tank left
