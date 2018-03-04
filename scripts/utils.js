@@ -19,7 +19,10 @@ function mainLoop(arr) {
     for (let i = arr.length - 1; i >= 0; i--) {
         let e = arr[i];
         e.act();
-        if (e.dead) arr.splice(i, 1);
+        if (e.dead) {
+            arr.splice(i, 1);
+            e.onDeath();
+        }
     }
 }
 

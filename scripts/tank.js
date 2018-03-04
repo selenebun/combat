@@ -19,6 +19,7 @@ class Tank extends Entity {
         // Stats
         this.angSpeed = radians(2);     // turning speed
         this.armor = 0;                 // shielding
+        this.bulletType = BULLET.basic; // projectile type
         this.maxSpeed = ts / 60 * 4;    // maximum speed
         
         // Fill in any other properties from the template
@@ -62,6 +63,11 @@ class Tank extends Entity {
         } else {
             this.left();
         }
+    }
+
+    // Fire projectile in direction
+    fire(x, y) {
+        bullets.push(new Bullet(this.pos.x, this.pos.y, x, y, this.bulletType));
     }
 
     // Accelerate tank forwards

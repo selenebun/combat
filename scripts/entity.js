@@ -49,5 +49,7 @@ class Entity {
     // Call in case anything needs to be dynamically set
     init() {}
 
+    onDeath() {}
+
     update() {}
 }

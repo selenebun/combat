@@ -139,5 +139,6 @@ function keyReleased() {
 function mousePressed() {
     // Spawn particle system at adjusted mouse position
     let m = adjustMouse();
-    ps.push(new ParticleSystem(m.x, m.y, PS.explosion));
+    //ps.push(new ParticleSystem(m.x, m.y, PS.explosion));
+    pl.fire(m.x, m.y);
 }

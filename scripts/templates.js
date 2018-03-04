@@ -43,6 +43,8 @@ AI.wander = {
 
 // Bullets
 
+BULLET.basic = {};
+
 
 // Models
 
