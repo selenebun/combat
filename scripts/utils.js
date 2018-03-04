@@ -21,7 +21,7 @@ function mainLoop(arr) {
         e.act();
         if (e.dead) {
             arr.splice(i, 1);
-            e.onDeath();
+            if (e.onDeath) e.onDeath();
         }
     }
 }

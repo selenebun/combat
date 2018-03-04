@@ -100,6 +100,11 @@ class Tank extends Entity {
         }
     }
 
+    // Explode on death
+    onDeath() {
+        ps.push(new ParticleSystem(this.pos.x, this.pos.y, PS.explosion));
+    }
+
     // Turn tank right
     right() {
         this.angle += this.angSpeed;

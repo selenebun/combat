@@ -22,6 +22,19 @@ class Bullet extends Entity {
         this.init();
     }
 
+    act() {
+        this.update();
+        // Check for collisions
+        for (let i = 0; i < tanks.length; i++) {
+            let t = tanks[i];
+            if (this.collide(t)) {
+                t.damage();
+                this.dead = true;
+            }
+        }
+        this.display();
+    }
+
     update() {
         this.pos.add(this.vel);
         if (offScreen(this.pos.x, this.pos.y, this.radius)) this.dead = true;
