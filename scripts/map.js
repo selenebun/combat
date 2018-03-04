@@ -30,7 +30,7 @@ class Map {
                     t(px, py);
                 } else {
                     fill(t);
-                    noStroke();
+                    stroke(0, 63);
                     rect(px, py, ts + 1, ts + 1);
                 }
             }
