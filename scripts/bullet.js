@@ -27,7 +27,7 @@ class Bullet extends Entity {
         // Check for collisions
         for (let i = 0; i < tanks.length; i++) {
             let t = tanks[i];
-            if (this.collide(t)) {
+            if (!this.dead && this.collide(t)) {
                 t.damage();
                 this.dead = true;
             }
