@@ -24,10 +24,6 @@ AI.follow = {
 
 AI.wander = {
     act: function() {
-        if (showHitboxes) {
-            stroke(255, 0, 0);
-            line(this.t.pos.x, this.t.pos.y, this.target.x, this.target.y);
-        }
         this.t.aim(pl.pos.x, pl.pos.y);
         if (this.t.contains(this.target.x, this.target.y)) {
             this.target = map.randomPos();
@@ -38,7 +34,7 @@ AI.wander = {
     init: function() {
         this.target = map.randomPos();
     }
-}
+};
 
 
 // Bullets

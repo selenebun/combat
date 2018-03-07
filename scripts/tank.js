@@ -91,6 +91,10 @@ class Tank extends Entity {
             this.stop();
             return;
         }
+        if (showHitboxes) {
+            stroke(255, 0, 0);
+            line(this.pos.x, this.pos.y, x, y);
+        }
         let a = createVector(x, y).sub(this.pos).heading();
         let diff = abs(this.angle - a);
         if (diff < radians(30)) {
