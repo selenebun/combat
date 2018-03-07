@@ -216,15 +216,15 @@ TANK.basic = {
     ai: AI.hunter
 };
 
-TANK.adv = {
+TANK.fast = {
     // AI
     ai: AI.hunter,
     // Display
     color: COLOR.teal,
     // Stats
     armor: 1,
-    bSpeed: 25,
-    maxSpeed: ts / 60 * 4.5
+    bCool: 28,
+    maxSpeed: ts / 60 * 6
 };
 
 TANK.heavy = {
@@ -233,20 +233,19 @@ TANK.heavy = {
     // Display
     color: COLOR.orange,
     // Stats
-    armor: 2,
-    bCool: 20,
-    maxSpeed: ts / 60 * 5
+    armor: 3,
+    bCool: 26
 };
 
-TANK.red = {
+TANK.adv = {
     // AI
     ai: AI.hunter,
     // Display
-    color: COLOR.orange,
+    color: COLOR.red,
     // Stats
-    armor: 4,
-    bCool: 15,
-    maxSpeed: ts / 60 * 6
+    armor: 2,
+    bCool: 22,
+    maxSpeed: ts / 60 * 4.5
 };
 
 TANK.boss = {
@@ -256,6 +255,6 @@ TANK.boss = {
     color: COLOR.purple,
     // Stats
     armor: 6,
-    bCool: 10,
-    maxSpeed: ts / 60 * 8
+    bCool: 24,
+    maxSpeed: ts / 60 * 5
 };

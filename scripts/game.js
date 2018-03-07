@@ -63,21 +63,30 @@ function resetEntities() {
     bullets = [];
     ps = [];
     tanks = [];
-    for (let i = 0; i < 10; i++) {
+
+    let p = map.randomPos();
+    tanks.push(new Tank(p.x, p.y, TANK.boss));
+
+    for (let i = 0; i < 2; i++) {
         let p = map.randomPos();
-        let r = random();
-        if (r < 0.08) {
-            tanks.push(new Tank(p.x, p.y, TANK.boss));
-        } else if (r < 0.2) {
-            tanks.push(new Tank(p.x, p.y, TANK.red));
-        } else if (r < 0.4) {
-            tanks.push(new Tank(p.x, p.y, TANK.heavy));
-        } else if (r < 0.6) {
-            tanks.push(new Tank(p.x, p.y, TANK.adv));
-        } else {
-            tanks.push(new Tank(p.x, p.y, TANK.basic));
-        }
+        tanks.push(new Tank(p.x, p.y, TANK.adv));
     }
+
+    for (let i = 0; i < 2; i++) {
+        let p = map.randomPos();
+        tanks.push(new Tank(p.x, p.y, TANK.heavy));
+    }
+
+    for (let i = 0; i < 2; i++) {
+        let p = map.randomPos();
+        tanks.push(new Tank(p.x, p.y, TANK.fast));
+    }
+
+    for (let i = 0; i < 4; i++) {
+        let p = map.randomPos();
+        tanks.push(new Tank(p.x, p.y, TANK.basic));
+    }
+
     spawnPlayer();
 }
 
