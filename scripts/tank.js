@@ -7,9 +7,8 @@ class Tank extends Entity {
         this.cooldown = 0;
 
         // Display
+        this.color = COLORS.green;      // [body color, turret color]
         this.model = MODEL.basicTank;   // skin
-        this.primary = '#007C21';       // body color
-        this.secondary = '#005C01';     // turret color
 
         // Physics
         this.speed = 0;                 // current speed

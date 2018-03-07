@@ -1,5 +1,6 @@
 const AI = {};
 const BULLET = {};
+const COLORS = {};
 const MODEL = {};
 const PART = {};
 const PS = {};
@@ -48,6 +49,12 @@ AI.wander = {
 // Bullets
 
 BULLET.basic = {};
+
+
+// Colors (organized by [light, dark])
+
+COLORS.green = ['#007C21', '#005C01'];
+COLORS.blue = ['#004790', '#102770'];
 
 
 // Models
@@ -102,7 +109,7 @@ MODEL.basicTank = function(t) {
 
 
     // Draw tank body
-    fill(t.primary);
+    fill(t.color[0]);
     rect(0, 0, ts, ts * 0.7, ts * 0.15);
 
     // Draw markings on front
@@ -125,7 +132,7 @@ MODEL.basicTank = function(t) {
     rect(r * 2 + w, 0, w * 2, ts * 0.3);
 
     // Draw turret
-    fill(t.secondary);
+    fill(t.color[1]);
     ellipseMode(CENTER)
     ellipse(0, 0, ts * 0.5, ts * 0.5);
 
@@ -170,8 +177,9 @@ PS.explosion = {
 
 TANK.player1 = {
     // Display
-    primary: '#004790',
-    secondary: '#102770'
+    color: COLORS.blue,
+    // Stats
+    armor: 5
 };
 
 TANK.aim = {
