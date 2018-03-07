@@ -32,6 +32,22 @@ function calcFPS() {
     document.getElementById('avgfps').innerHTML = 'Avg. FPS: ' + avgFPS.toFixed(1); 
 }
 
+// Generate rectangular map
+function generateMap(cols, rows) {
+    let tiles = [];
+    for (let x = 0; x < cols; x++) {
+        tiles[x] = [];
+        for (let y = 0; y < rows; y++) {
+            if (x === 0 || y === 0 || x === cols-1 || y === rows-1) {
+                tiles[x][y] = ['wall'];
+            } else {
+                tiles[x][y] = ['concrete'];
+            }
+        }
+    }
+    return new Map(tiles);
+}
+
 // Update game status on sidebar
 function updateStatus() {
     document.getElementById('wave').innerHTML = 'Wave ' + wave;
@@ -51,25 +67,17 @@ function setup() {
     canvas.parent(div);
     resizeCanvas(div.offsetWidth, div.offsetHeight, true);
 
-    let tiles = [];
-    for (let x = 0; x < 48; x++) {
-        tiles[x] = [];
-        for (let y = 0; y < 32; y++) {
-            if (x === 0 || y === 0 || x === 47 || y === 31) {
-                tiles[x][y] = ['wall'];
-            } else {
-                tiles[x][y] = ['concrete'];
-            }
-        }
-    }
-    map = new Map(tiles);
+    // Generate rectangular map
+    map = generateMap(48, 32);
 
+    // Generate enemy tanks
     for (let i = 0; i < 10; i++) {
         let p = map.randomPos();
         //tanks.push(new Tank(p.x, p.y, random() < 0.3 ? TANK.follow : TANK.aim));
-        tanks.push(new Tank(p.x, p.y, TANK.wander));
+        tanks.push(new Tank(p.x, p.y, TANK.hunter));
     }
 
+    // Spawn player at center
     let c = map.center();
     pl = new Tank(c.x, c.y, TANK.player1);
 }

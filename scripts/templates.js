@@ -22,6 +22,14 @@ AI.follow = {
     }
 };
 
+AI.hunter = {
+    act: function() {
+        this.t.aim(pl.pos.x, pl.pos.y);
+        this.t.navigateTo(pl.pos.x, pl.pos.y);
+        if (this.t.pos.dist(pl.pos) < ts * 8) this.t.fire(pl.pos.x, pl.pos.y);
+    }
+};
+
 AI.wander = {
     act: function() {
         this.t.aim(pl.pos.x, pl.pos.y);
@@ -176,6 +184,12 @@ TANK.follow = {
     ai: AI.follow
 };
 
+TANK.hunter = {
+    // AI
+    ai: AI.hunter
+};
+
 TANK.wander = {
+    // AI
     ai: AI.wander
 };

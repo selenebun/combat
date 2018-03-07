@@ -24,7 +24,7 @@ class Bullet extends Entity {
     }
 
     act() {
-        this.update();
+        super.act();
         // Check for collisions
         let targets = tanks.concat(pl);
         for (let i = 0; i < targets.length; i++) {
@@ -35,7 +35,6 @@ class Bullet extends Entity {
                 this.dead = true;
             }
         }
-        this.display();
     }
 
     update() {
