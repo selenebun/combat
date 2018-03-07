@@ -4,7 +4,6 @@ let tanks;
 
 let map;
 
-let armor = 0;
 let kills = 0;
 let lives = 3;
 let pl;
@@ -83,7 +82,7 @@ function spawnPlayer() {
 function updateStatus() {
     document.getElementById('wave').innerHTML = 'Wave ' + wave;
     document.getElementById('lives').innerHTML = 'Lives: ' + lives + '/3';
-    document.getElementById('armor').innerHTML = 'Armor: ' + armor;
+    document.getElementById('armor').innerHTML = 'Armor: ' + pl.armor;
     document.getElementById('kills').innerHTML = 'Kills: ' + kills;
 }
 
