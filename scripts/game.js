@@ -89,10 +89,10 @@ function draw() {
     controls();
 
     // Entities
+    mainLoop(bullets);
     mainLoop(tanks);
     pl.act();
     mainLoop(ps);
-    mainLoop(bullets);
 }
 
 
