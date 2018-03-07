@@ -1,6 +1,6 @@
 const AI = {};
 const BULLET = {};
-const COLORS = {};
+const COLOR = {};
 const MODEL = {};
 const PART = {};
 const PS = {};
@@ -53,8 +53,12 @@ BULLET.basic = {};
 
 // Colors (organized by [light, dark])
 
-COLORS.green = ['#007C21', '#005C01'];
-COLORS.blue = ['#004790', '#102770'];
+COLOR.green = ['#007C21', '#005C01'];
+COLOR.yellow = [];
+COLOR.orange = [];
+COLOR.red = [];
+COLOR.purple = [];
+COLOR.blue = ['#004790', '#102770'];
 
 
 // Models
@@ -177,7 +181,7 @@ PS.explosion = {
 
 TANK.player1 = {
     // Display
-    color: COLORS.blue,
+    color: COLOR.blue,
     // Stats
     armor: 5
 };
