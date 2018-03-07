@@ -67,7 +67,7 @@ class Tank extends Entity {
 
     // Fire projectile in direction
     fire(x, y) {
-        bullets.push(new Bullet(this.pos.x, this.pos.y, x, y, this.bulletType));
+        bullets.push(new Bullet(this.pos.x, this.pos.y, x, y, this.bulletType, this));
     }
 
     // Accelerate tank forwards

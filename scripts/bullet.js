@@ -1,8 +1,9 @@
 class Bullet extends Entity {
-    constructor(x, y, targetX, targetY, template) {
+    constructor(x, y, targetX, targetY, template, owner) {
         super(x, y);
 
         // AI
+        this.owner = owner;
         this.target = createVector(targetX, targetY);
 
         // Display
@@ -25,8 +26,10 @@ class Bullet extends Entity {
     act() {
         this.update();
         // Check for collisions
-        for (let i = 0; i < tanks.length; i++) {
-            let t = tanks[i];
+        let targets = tanks.concat(pl);
+        for (let i = 0; i < targets.length; i++) {
+            let t = targets[i];
+            if (t === this.owner) continue;
             if (!this.dead && this.collide(t)) {
                 t.damage();
                 this.dead = true;
