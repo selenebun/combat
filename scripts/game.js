@@ -1,6 +1,6 @@
-let bullets = [];
-let ps = [];
-let tanks = [];
+let bullets;
+let ps;
+let tanks;
 
 let map;
 
@@ -48,6 +48,37 @@ function generateMap(cols, rows) {
     return new Map(tiles);
 }
 
+// Handle player death
+function playerDead() {
+    if (lives > 0) {
+        lives--;
+    } else {
+        lives = 3;
+        resetEntities();
+    }
+
+    // Respawn player at center
+    spawnPlayer();
+}
+
+// Reset all entities
+function resetEntities() {
+    bullets = [];
+    ps = [];
+    tanks = [];
+    for (let i = 0; i < 10; i++) {
+        let p = map.randomPos();
+        tanks.push(new Tank(p.x, p.y, TANK.hunter));
+    }
+    spawnPlayer();
+}
+
+// Spawn player at center of map
+function spawnPlayer() {
+    let c = map.center();
+    pl = new Tank(c.x, c.y, TANK.player1);
+}
+
 // Update game status on sidebar
 function updateStatus() {
     document.getElementById('wave').innerHTML = 'Wave ' + wave;
@@ -70,16 +101,8 @@ function setup() {
     // Generate rectangular map
     map = generateMap(48, 32);
 
-    // Generate enemy tanks
-    for (let i = 0; i < 10; i++) {
-        let p = map.randomPos();
-        //tanks.push(new Tank(p.x, p.y, random() < 0.3 ? TANK.follow : TANK.aim));
-        tanks.push(new Tank(p.x, p.y, TANK.hunter));
-    }
-
-    // Spawn player at center
-    let c = map.center();
-    pl = new Tank(c.x, c.y, TANK.player1);
+    // Generate player and enemy tanks
+    resetEntities();
 }
 
 function draw() {
@@ -101,6 +124,9 @@ function draw() {
     mainLoop(tanks);
     pl.act();
     mainLoop(ps);
+
+    // Handle player death
+    if (pl.dead) playerDead();
 }
 
 

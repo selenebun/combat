@@ -21,7 +21,7 @@ class Tank extends Entity {
         this.angSpeed = radians(2);     // turning speed
         this.armor = 0;                 // shielding
         this.bulletType = BULLET.basic; // projectile type
-        this.bCool = 20;                // cooldown between firing bullets
+        this.bCool = 30;                // cooldown between firing bullets
         this.maxSpeed = ts / 60 * 4;    // maximum speed
         
         // Fill in any other properties from the template
