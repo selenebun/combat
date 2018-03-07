@@ -1,3 +1,5 @@
+let ts = 48;
+
 const AI = {};
 const BULLET = {};
 const COLOR = {};
@@ -54,10 +56,10 @@ BULLET.basic = {};
 // Colors (organized by [light, dark])
 
 COLOR.green = ['#007C21', '#005C01'];
-COLOR.yellow = [];
-COLOR.orange = [];
-COLOR.red = [];
-COLOR.purple = [];
+COLOR.teal = ['#007B70', '#005B50'];
+COLOR.orange = ['#E67E22', '#C86400'];
+COLOR.red = ['#A70C00', '#870000'];
+COLOR.purple = ['#5E147D', '#4E046D'];
 COLOR.blue = ['#004790', '#102770'];
 
 
@@ -183,7 +185,7 @@ TANK.player1 = {
     // Display
     color: COLOR.blue,
     // Stats
-    armor: 5
+    armor: 20
 };
 
 TANK.aim = {
@@ -198,10 +200,62 @@ TANK.follow = {
 
 TANK.hunter = {
     // AI
-    ai: AI.hunter
+    ai: AI.hunter,
+    // Display
+    color: COLOR.teal
 };
 
 TANK.wander = {
     // AI
     ai: AI.wander
+};
+
+
+TANK.basic = {
+    // AI
+    ai: AI.hunter
+};
+
+TANK.adv = {
+    // AI
+    ai: AI.hunter,
+    // Display
+    color: COLOR.teal,
+    // Stats
+    armor: 1,
+    bSpeed: 25,
+    maxSpeed: ts / 60 * 4.5
+};
+
+TANK.heavy = {
+    // AI
+    ai: AI.hunter,
+    // Display
+    color: COLOR.orange,
+    // Stats
+    armor: 2,
+    bCool: 20,
+    maxSpeed: ts / 60 * 5
+};
+
+TANK.red = {
+    // AI
+    ai: AI.hunter,
+    // Display
+    color: COLOR.orange,
+    // Stats
+    armor: 4,
+    bCool: 15,
+    maxSpeed: ts / 60 * 6
+};
+
+TANK.boss = {
+    // AI
+    ai: AI.hunter,
+    // Display
+    color: COLOR.purple,
+    // Stats
+    armor: 6,
+    bCool: 10,
+    maxSpeed: ts / 60 * 8
 };

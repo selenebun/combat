@@ -9,8 +9,6 @@ let lives = 3;
 let pl;
 let wave = 1;
 
-let ts = 48;
-
 let avgFPS = 0;
 let numFPS = 0;
 
@@ -67,7 +65,18 @@ function resetEntities() {
     tanks = [];
     for (let i = 0; i < 10; i++) {
         let p = map.randomPos();
-        tanks.push(new Tank(p.x, p.y, TANK.hunter));
+        let r = random();
+        if (r < 0.08) {
+            tanks.push(new Tank(p.x, p.y, TANK.boss));
+        } else if (r < 0.2) {
+            tanks.push(new Tank(p.x, p.y, TANK.red));
+        } else if (r < 0.4) {
+            tanks.push(new Tank(p.x, p.y, TANK.heavy));
+        } else if (r < 0.6) {
+            tanks.push(new Tank(p.x, p.y, TANK.adv));
+        } else {
+            tanks.push(new Tank(p.x, p.y, TANK.basic));
+        }
     }
     spawnPlayer();
 }
