@@ -17,7 +17,7 @@ class Tank extends Entity {
         this.radius = ts * 0.6;         // hitbox radius
 
         // Stats
-        this.angSpeed = radians(2);     // turning speed
+        this.angSpeed = radians(3);     // turning speed
         this.armor = 0;                 // shielding
         this.bCool = 30;                // cooldown between firing bullets
         this.canPickUp = false;         // whether to pick up items

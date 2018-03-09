@@ -170,7 +170,7 @@ ITEM.shield = {
     }
 };
 
-ITEM.bullet = {
+ITEM.fastFire = {
     // Display
     color: COLOR.green,
     model: MODEL.shieldItem,
@@ -178,7 +178,7 @@ ITEM.bullet = {
     radius: ts / 3,
     // Methods
     onPickup(t) {
-        t.weapon = new Weapon(t, WEAPON.bullet);
+        if (t.bCool > 2) t.bCool -= 2;
     }
 };
 
@@ -242,7 +242,6 @@ WEAPON.shotgun = {
         let da = radians(15);
         bullets.push(new Bullet(this.t.pos.x, this.t.pos.y, a + da, this.bulletType, this.t));
         bullets.push(new Bullet(this.t.pos.x, this.t.pos.y, a - da, this.bulletType, this.t));
-        console.log('shotgun');
     }
 };
 
@@ -253,13 +252,15 @@ TANK.player1 = {
     // Display
     color: COLOR.blue,
     // Stats
-    armor: 20,
+    armor: 10,
     canPickUp: true
 };
 
 TANK.basic = {
     // AI
-    ai: AI.hunter
+    ai: AI.hunter,
+    // Stats
+    canPickUp: true
 };
 
 TANK.fast = {
@@ -270,6 +271,7 @@ TANK.fast = {
     // Stats
     armor: 1,
     bCool: 28,
+    canPickUp: true,
     maxSpeed: ts / 60 * 6
 };
 
@@ -280,7 +282,8 @@ TANK.heavy = {
     color: COLOR.orange,
     // Stats
     armor: 3,
-    bCool: 26
+    bCool: 26,
+    canPickUp: true
 };
 
 TANK.adv = {
@@ -291,6 +294,7 @@ TANK.adv = {
     // Stats
     armor: 2,
     bCool: 22,
+    canPickUp: true,
     maxSpeed: ts / 60 * 4.5
 };
 
@@ -302,5 +306,6 @@ TANK.boss = {
     // Stats
     armor: 6,
     bCool: 24,
+    canPickUp: true,
     maxSpeed: ts / 60 * 5
 };

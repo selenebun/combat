@@ -5,7 +5,6 @@ let tanks;
 
 let map;
 
-let lives = 3;
 let pl;
 let wave = 1;
 
@@ -54,15 +53,8 @@ function generateRectMap(cols, rows) {
 
 // Handle player death
 function playerDead() {
-    if (lives > 0) {
-        lives--;
-    } else {
-        lives = 3;
-        generateMap();
-        resetEntities();
-    }
-
-    // Respawn player at center
+    generateMap();
+    resetEntities();
     spawnPlayer();
 }
 
@@ -83,7 +75,7 @@ function resetEntities() {
         } else if (r < 0.66) {
             t = ITEM.shotgun;
         } else {
-            t = ITEM.bullet;
+            t = ITEM.fastFire;
         }
         items.push(new Item(p.x, p.y, t));
     }
@@ -124,7 +116,6 @@ function spawnPlayer() {
 // Update game status on sidebar
 function updateStatus() {
     document.getElementById('wave').innerHTML = 'Wave ' + wave;
-    document.getElementById('lives').innerHTML = 'Lives: ' + lives + '/3';
     document.getElementById('armor').innerHTML = 'Armor: ' + pl.armor;
     document.getElementById('tanks').innerHTML = 'Tanks left: ' + tanks.length;
 }
