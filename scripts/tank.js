@@ -10,6 +10,9 @@ class Tank extends Entity {
         this.color = COLOR.green;       // [body color, turret color]
         this.model = MODEL.basicTank;   // skin
 
+        // Misc
+        this.attempts = 0;              // turn attempts
+
         // Physics
         this.speed = 0;                 // current speed
         this.angle = random(TWO_PI);    // angle of tank
@@ -99,9 +102,12 @@ class Tank extends Entity {
         }
         let a = createVector(x, y).sub(this.pos).heading();
         let diff = abs(this.angle - a);
-        if (diff < radians(30)) {
+        if (this.attempts > 60 || diff < radians(30)) {
+            if (this.attempts > 60) this.angle = a;
+            this.attempts = 0;
             this.forward();
         } else {
+            this.attempts++;
             this.face(x, y);
         }
     }
