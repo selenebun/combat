@@ -20,6 +20,7 @@ class Tank extends Entity {
         this.angSpeed = radians(2);     // turning speed
         this.armor = 0;                 // shielding
         this.bCool = 30;                // cooldown between firing bullets
+        this.canPickUp = false;         // whether to pick up items
         this.maxSpeed = ts / 60 * 4;    // maximum speed
         
         // Fill in any other properties from the template
@@ -78,7 +79,7 @@ class Tank extends Entity {
     // Call in case anything needs to be dynamically set
     init() {
         this.ai = new TankAI(this, this.ai);
-        this.weapon = new Weapon(this, this.ai);
+        this.weapon = new Weapon(this, this.weapon);
     }
 
     // Turn tank left
@@ -126,5 +127,17 @@ class Tank extends Entity {
         
         // Update weapon cooldown
         this.weapon.update();
+
+        // Pick up items
+        if (this.canPickUp) {
+            for (let i = 0; i < items.length; i++) {
+                let it = items[i];
+                if (!it.dead && this.collide(it)) {
+                    it.dead = true;
+                    it.onPickup(this);
+                    break;
+                }
+            }
+        }
     }
 }

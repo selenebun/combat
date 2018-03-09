@@ -1,4 +1,5 @@
 let bullets;
+let items;
 let ps;
 let tanks;
 
@@ -68,9 +69,26 @@ function playerDead() {
 // Reset all entities
 function resetEntities() {
     bullets = [];
+    items = [];
     ps = [];
     tanks = [];
 
+    // Spawn items
+    for (let i = 0; i < 10; i++) {
+        let p = map.randomPos();
+        let r = random();
+        let t;
+        if (r < 0.33) {
+            t = ITEM.shield;
+        } else if (r < 0.66) {
+            t = ITEM.shotgun;
+        } else {
+            t = ITEM.bullet;
+        }
+        items.push(new Item(p.x, p.y, t));
+    }
+
+    // Spawn tanks
     let p = map.randomPos();
     tanks.push(new Tank(p.x, p.y, TANK.boss));
 
@@ -145,6 +163,7 @@ function draw() {
 
     // Entities
     mainLoop(bullets);
+    mainLoop(items);
     mainLoop(tanks);
     pl.act();
     mainLoop(ps);

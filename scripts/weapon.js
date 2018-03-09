@@ -15,7 +15,8 @@ class Weapon {
     fire(x, y) {
         if (this.cooldown > 0) return;
         this.cooldown = this.t.bCool;
-        bullets.push(new Bullet(this.t.pos.x, this.t.pos.y, x, y, this.bulletType, this.t));
+        let a = createVector(x, y).sub(this.t.pos).heading();
+        bullets.push(new Bullet(this.t.pos.x, this.t.pos.y, a, this.bulletType, this.t));
     }
 
     // Call in case anything needs to be dynamically set

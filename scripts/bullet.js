@@ -1,10 +1,9 @@
 class Bullet extends Entity {
-    constructor(x, y, targetX, targetY, template, owner) {
+    constructor(x, y, angle, template, owner) {
         super(x, y);
 
         // AI
         this.owner = owner;
-        this.target = createVector(targetX, targetY);
 
         // Display
         this.model = MODEL.basicBullet; // skin
@@ -17,7 +16,7 @@ class Bullet extends Entity {
         applyTemplate(this, template);
 
         // Set velocity
-        this.vel = p5.Vector.sub(this.target, this.pos).setMag(this.speed);
+        this.vel = p5.Vector.fromAngle(angle).mult(this.speed);
 
         // Call init() method in case anything else needs to be set
         this.init();

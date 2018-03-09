@@ -3,6 +3,7 @@ let ts = 48;
 const AI = {};
 const BULLET = {};
 const COLOR = {};
+const ITEM = {};
 const MODEL = {};
 const PART = {};
 const PS = {};
@@ -77,6 +78,14 @@ MODEL.basicBullet = function(b) {
     ellipse(b.pos.x, b.pos.y, b.radius, b.radius);
 };
 
+// Item models
+MODEL.shieldItem = function(e) {
+    fill(e.color[0]);
+    stroke(0);
+    rectMode(CENTER);
+    rect(e.pos.x, e.pos.y, e.radius, e.radius);
+};
+
 // Particle models
 MODEL.basicParticle = function(p) {
     fill(p.color.concat(p.lifespan));
@@ -147,6 +156,45 @@ MODEL.basicTank = function(t) {
 };
 
 
+// Items
+
+ITEM.shield = {
+    // Display
+    color: COLOR.blue,
+    model: MODEL.shieldItem,
+    // Physics
+    radius: ts / 3,
+    // Methods
+    onPickup(t) {
+        t.armor++;
+    }
+};
+
+ITEM.bullet = {
+    // Display
+    color: COLOR.green,
+    model: MODEL.shieldItem,
+    // Physics
+    radius: ts / 3,
+    // Methods
+    onPickup(t) {
+        t.weapon = new Weapon(t, WEAPON.bullet);
+    }
+};
+
+ITEM.shotgun = {
+    // Display
+    color: COLOR.orange,
+    model: MODEL.shieldItem,
+    // Physics
+    radius: ts / 3,
+    // Methods
+    onPickup(t) {
+        t.weapon = new Weapon(t, WEAPON.shotgun);
+    }
+};
+
+
 // Particles
 
 PART.fire = {
@@ -180,37 +228,34 @@ PS.explosion = {
 };
 
 
+// Weapons
+
+WEAPON.bullet = {};
+
+WEAPON.shotgun = {
+    // Methods
+    fire: function(x, y) {
+        if (this.cooldown > 0) return;
+        this.cooldown = this.t.bCool;
+        let a = createVector(x, y).sub(this.t.pos).heading();
+        bullets.push(new Bullet(this.t.pos.x, this.t.pos.y, a, this.bulletType, this.t));
+        let da = radians(15);
+        bullets.push(new Bullet(this.t.pos.x, this.t.pos.y, a + da, this.bulletType, this.t));
+        bullets.push(new Bullet(this.t.pos.x, this.t.pos.y, a - da, this.bulletType, this.t));
+        console.log('shotgun');
+    }
+};
+
+
 // Tanks
 
 TANK.player1 = {
     // Display
     color: COLOR.blue,
     // Stats
-    armor: 20
+    armor: 20,
+    canPickUp: true
 };
-
-TANK.aim = {
-    // AI
-    ai: AI.aim
-};
-
-TANK.follow = {
-    // AI
-    ai: AI.follow
-};
-
-TANK.hunter = {
-    // AI
-    ai: AI.hunter,
-    // Display
-    color: COLOR.teal
-};
-
-TANK.wander = {
-    // AI
-    ai: AI.wander
-};
-
 
 TANK.basic = {
     // AI
@@ -259,6 +304,3 @@ TANK.boss = {
     bCool: 24,
     maxSpeed: ts / 60 * 5
 };
-
-
-// Weapons
