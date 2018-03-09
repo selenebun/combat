@@ -57,6 +57,7 @@ function playerDead() {
         lives--;
     } else {
         lives = 3;
+        generateMap();
         resetEntities();
     }
 

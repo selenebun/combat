@@ -31,6 +31,5 @@ class ParticleSystem {
         for (let i = 0; i < num; i++) {
             this.particles.push(new Particle(this.pos.x, this.pos.y, this.speed, this.pTemp));
         }
-        console.log(this.particles.length);
     }
 }

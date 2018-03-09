@@ -7,6 +7,7 @@ const MODEL = {};
 const PART = {};
 const PS = {};
 const TANK = {};
+const WEAPON = {};
 
 
 // AIs
@@ -258,3 +259,6 @@ TANK.boss = {
     bCool: 24,
     maxSpeed: ts / 60 * 5
 };
+
+
+// Weapons

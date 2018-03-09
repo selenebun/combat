@@ -3,8 +3,8 @@ class Tank extends Entity {
         super(x, y);
 
         // AI
-        this.ai = {};                   // AI
-        this.cooldown = 0;
+        this.ai = {};                   // AI template
+        this.weapon = {};               // weapon template
 
         // Display
         this.color = COLOR.green;       // [body color, turret color]
@@ -19,7 +19,6 @@ class Tank extends Entity {
         // Stats
         this.angSpeed = radians(2);     // turning speed
         this.armor = 0;                 // shielding
-        this.bulletType = BULLET.basic; // projectile type
         this.bCool = 30;                // cooldown between firing bullets
         this.maxSpeed = ts / 60 * 4;    // maximum speed
         
@@ -68,9 +67,7 @@ class Tank extends Entity {
 
     // Fire projectile in direction
     fire(x, y) {
-        if (this.cooldown > 0) return;
-        this.cooldown = this.bCool;
-        bullets.push(new Bullet(this.pos.x, this.pos.y, x, y, this.bulletType, this));
+        this.weapon.fire(x, y);
     }
 
     // Accelerate tank forwards
@@ -81,6 +78,7 @@ class Tank extends Entity {
     // Call in case anything needs to be dynamically set
     init() {
         this.ai = new TankAI(this, this.ai);
+        this.weapon = new Weapon(this, this.ai);
     }
 
     // Turn tank left
@@ -125,7 +123,8 @@ class Tank extends Entity {
     update() {
         // Add velocity vector in direction of the angle
         this.pos.add(p5.Vector.fromAngle(this.angle, this.speed));
-        // Update cooldown
-        if (this.cooldown > 0) this.cooldown--;
+        
+        // Update weapon cooldown
+        this.weapon.update();
     }
 }
