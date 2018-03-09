@@ -252,7 +252,7 @@ TANK.player1 = {
     // Display
     color: COLOR.blue,
     // Stats
-    armor: 1000,
+    armor: 10,
     canPickUp: true
 };
 
