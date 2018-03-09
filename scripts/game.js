@@ -28,8 +28,15 @@ function calcFPS() {
     document.getElementById('avgfps').innerHTML = 'Avg. FPS: ' + avgFPS.toFixed(1); 
 }
 
+// Generate map
+function generateMap() {
+    let x = floor(random(8, 64));
+    let y = floor(4096 / x);
+    map = generateRectMap(x, y);
+}
+
 // Generate rectangular map
-function generateMap(cols, rows) {
+function generateRectMap(cols, rows) {
     let tiles = [];
     for (let x = 0; x < cols; x++) {
         tiles[x] = [];
@@ -114,8 +121,8 @@ function setup() {
     canvas.parent(div);
     resizeCanvas(div.offsetWidth, div.offsetHeight, true);
 
-    // Generate rectangular map
-    map = generateMap(48, 32);
+    // Generate the map
+    generateMap();
 
     // Generate player and enemy tanks
     resetEntities();
