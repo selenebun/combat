@@ -11,7 +11,7 @@ class Tank extends Entity {
         this.model = MODEL.basicTank;   // skin
 
         // Misc
-        this.attempts = 0;              // turn attempts
+        this.attempts = 0;              // turning attempts
 
         // Physics
         this.speed = 0;                 // current speed
@@ -104,7 +104,6 @@ class Tank extends Entity {
         let diff = abs(this.angle - a);
         if (this.attempts > 60 || diff < radians(30)) {
             if (this.attempts > 60) this.angle = a;
-            this.attempts = 0;
             this.forward();
         } else {
             this.attempts++;
@@ -114,6 +113,7 @@ class Tank extends Entity {
 
     // Explode on death
     onDeath() {
+        play('boom');
         ps.push(new ParticleSystem(this.pos.x, this.pos.y, PS.explosion));
     }
 

@@ -16,5 +16,10 @@ class Item extends Entity {
         this.init();
     }
 
-    onPickup(t) {}
+    action(t) {}
+
+    onPickup(t) {
+        if (t === pl) play(random() < 0.5 ? 'pickup1' : 'pickup2');
+        this.action(t);
+    }
 }

@@ -7,6 +7,7 @@ const ITEM = {};
 const MODEL = {};
 const PART = {};
 const PS = {};
+const SOUND = {};
 const TANK = {};
 const WEAPON = {};
 
@@ -165,7 +166,7 @@ ITEM.shield = {
     // Physics
     radius: ts / 3,
     // Methods
-    onPickup(t) {
+    action(t) {
         t.armor++;
     }
 };
@@ -177,8 +178,21 @@ ITEM.fastFire = {
     // Physics
     radius: ts / 3,
     // Methods
-    onPickup(t) {
+    action(t) {
         if (t.bCool > 2) t.bCool -= 2;
+    }
+};
+
+ITEM.moveSpeed = {
+    // Display
+    color: COLOR.red,
+    model: MODEL.shieldItem,
+    // Physics
+    radius: ts / 3,
+    // Methods
+    action(t) {
+        t.maxSpeed *= 1.25;
+        t.speed = t.maxSpeed;
     }
 };
 
@@ -189,8 +203,20 @@ ITEM.shotgun = {
     // Physics
     radius: ts / 3,
     // Methods
-    onPickup(t) {
+    action(t) {
         t.weapon = new Weapon(t, WEAPON.shotgun);
+    }
+};
+
+ITEM.star = {
+    // Display
+    color: COLOR.purple,
+    model: MODEL.shieldItem,
+    // Physics
+    radius: ts / 3,
+    // Methods
+    action(t) {
+        t.weapon = new Weapon(t, WEAPON.star);
     }
 };
 
@@ -237,11 +263,27 @@ WEAPON.shotgun = {
     fire: function(x, y) {
         if (this.cooldown > 0) return;
         this.cooldown = this.t.bCool;
+        play(this.sound);
         let a = createVector(x, y).sub(this.t.pos).heading();
         bullets.push(new Bullet(this.t.pos.x, this.t.pos.y, a, this.bulletType, this.t));
         let da = radians(15);
         bullets.push(new Bullet(this.t.pos.x, this.t.pos.y, a + da, this.bulletType, this.t));
         bullets.push(new Bullet(this.t.pos.x, this.t.pos.y, a - da, this.bulletType, this.t));
+    }
+};
+
+WEAPON.star = {
+    // Methods
+    fire: function() {
+        if (this.cooldown > 0) return;
+        this.cooldown = this.t.bCool;
+        play(this.sound);
+        let a = 0;
+        let ct = 8;
+        for (let i = 0; i < ct; i++) {
+            bullets.push(new Bullet(this.t.pos.x, this.t.pos.y, a, this.bulletType, this.t));
+            a += radians(360 / ct);
+        }
     }
 };
 
@@ -252,7 +294,7 @@ TANK.player1 = {
     // Display
     color: COLOR.blue,
     // Stats
-    armor: 10,
+    armor: 15,
     canPickUp: true
 };
 

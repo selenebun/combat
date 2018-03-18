@@ -30,3 +30,8 @@ function mainLoop(arr) {
 function offScreen(x, y, r) {
     return (x + r < pl.pos.x - width/2 || x - r > pl.pos.x + width/2 || y + r < pl.pos.y - height/2 || y - r > pl.pos.y + height/2);
 }
+
+// Play sound
+function play(sound) {
+    if (!mute) SOUND[sound].play();
+}

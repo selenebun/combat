@@ -1,6 +1,8 @@
 # combat
 A single- and multiplayer combat game programmed in Javascript using p5.js, playable [here](https://xithiox.github.io/combat/).
 
+All sounds provided by [Kjades](https://github.com/bttglrsff).
+
 ### Controls
 * Mouse to aim, click to fire
 * F to toggle showing the framerate

@@ -11,6 +11,7 @@ let wave = 1;
 let avgFPS = 0;
 let numFPS = 0;
 
+let mute = false;
 let showFPS = false;
 let showHitboxes = false;
 
@@ -65,22 +66,40 @@ function resetEntities() {
     ps = [];
     tanks = [];
 
-    // Spawn items
-    for (let i = 0; i < 10; i++) {
+    spawnItems(20);
+    spawnTanks();
+    spawnPlayer();
+}
+
+// Spawn items
+function spawnItems(count) {
+    for (let i = 0; i < count; i++) {
         let p = map.randomPos();
         let r = random();
         let t;
-        if (r < 0.33) {
+        if (r < 0.2) {
             t = ITEM.shield;
-        } else if (r < 0.66) {
+        } else if (r < 0.4) {
             t = ITEM.shotgun;
-        } else {
+        } else if (r < 0.6) {
             t = ITEM.fastFire;
+        } else if (r < 0.8) {
+            t = ITEM.moveSpeed;
+        } else {
+            t = ITEM.star;
         }
         items.push(new Item(p.x, p.y, t));
     }
+}
 
-    // Spawn tanks
+// Spawn player at center of map
+function spawnPlayer() {
+    let c = map.center();
+    pl = new Tank(c.x, c.y, TANK.player1);
+}
+
+// Spawn enemy tanks
+function spawnTanks() {
     let p = map.randomPos();
     tanks.push(new Tank(p.x, p.y, TANK.boss));
 
@@ -103,14 +122,6 @@ function resetEntities() {
         let p = map.randomPos();
         tanks.push(new Tank(p.x, p.y, TANK.basic));
     }
-
-    spawnPlayer();
-}
-
-// Spawn player at center of map
-function spawnPlayer() {
-    let c = map.center();
-    pl = new Tank(c.x, c.y, TANK.player1);
 }
 
 // Update game status on sidebar
@@ -124,6 +135,21 @@ function updateStatus() {
 /*
  * Main p5.js functions
  */
+
+function preload() {
+    // Explosion sound
+    SOUND.boom = loadSound('sounds/Boom2.wav');
+    SOUND.boom.setVolume(0.6);
+
+    // Item pickup sounds
+    SOUND.pickup1 = loadSound('sounds/FX1.wav');
+    SOUND.pickup2 = loadSound('sounds/FX2.wav');
+    SOUND.pickup2.setVolume(0.4);
+
+    // Shooting sound
+    SOUND.shoot = loadSound('sounds/Percussion_24_SP.wav');
+    SOUND.shoot.setVolume(0.35);
+}
 
 function setup() {
     let div = document.getElementById('game');
@@ -161,6 +187,12 @@ function draw() {
 
     // Handle player death
     if (pl.dead) playerDead();
+
+    // Spawn more items and enemy tanks if all are dead
+    if (tanks.length === 0) {
+        spawnItems(4);
+        spawnTanks();
+    }
 }
 
 
