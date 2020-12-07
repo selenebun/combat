@@ -48,16 +48,12 @@ body {
     overflow-y: scroll;
 }
 
-header, main, footer {
+header, main {
     padding: 16px;
 }
 
 main {
     flex: 1;
-}
-
-footer {
-    padding-bottom: 0;
 }
 
 
@@ -72,9 +68,5 @@ canvas {
 h1, h2, h3, h4, h5, h6 {
     color: var(--accent);
     line-height: 1.2;
-    text-align: center;
-}
-
-#copyright {
     text-align: center;
 }
